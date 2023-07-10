@@ -25,7 +25,7 @@ def get_driver():
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
                               options=chrome_options)
     driver.maximize_window()
-    driver.implicitly_wait(8)
+    driver.implicitly_wait(6)
     return driver
 
 
@@ -99,10 +99,10 @@ def auth_is_successful(driver):
     :param driver: Экземпляр вебдрайвера
     """
     # уменьшаем время ожидания для оптимизации
-    driver.implicitly_wait(0)
-    # пробуем получить кнопку "Login" с текущей страницы
+    driver.implicitly_wait(2)
+    # пробуем получить сообщение об ошибке аутентификации
     try:
-        get_element_by_selector(driver, "login-button")
+        get_element_by_selector(driver, "error")
     # если получить элемент не получается, значит аутентификация пройдена и мы уже на другой странице
     except exceptions.NoSuchElementException:
         print("Success")
